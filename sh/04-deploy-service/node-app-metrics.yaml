@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $NODE_APP_NAME-deployment
+  labels:
+    app: $NODE_APP_NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: $NODE_APP_NAME
+  template:
+    metadata:
+      labels:
+        app: $NODE_APP_NAME
+    spec:
+      containers:
+        - name: $NODE_APP_NAME
+          image: $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$NODE_APP_NAME:latest
+          ports:
+            - containerPort: 3000

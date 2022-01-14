@@ -1,0 +1,18 @@
+{
+  "name": "node-app-metrics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:login-to-public-ecr": "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws",
+    "docker:build": "docker build --tag node-app-metrics .  ",
+    "docker:run": "docker run -p3000:3000 --env-file ./env-file  node-app-metrics"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "prom-client": "^14.0.1"
+  }
+}

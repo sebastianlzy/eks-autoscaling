@@ -25,20 +25,40 @@ Grafana is open source visualization and analytics software. It allows you to qu
 
 # Getting started
 
-## 1. Create EKS cluster
+## 1. Prerequisite
+
+
+## 2. Create SQS queue with a load generator lambda
+
+## 3. Create EKS cluster with prometheus + grafana
 
 ```
+# Create EKS Cluster
 > . ./sh/01-eks/01-eks-create-cluster.sh
-```
 
-## 2. Create Prometheus Metric server
-
-```
+# Create Prometheus metrics server
 > . ./sh/02-prometheus/02-create-prometheus.sh
-```
 
-## 3. Create Grafana
-
-```
+# Create Grafana
 > . ./sh/03-grafana/03-create-grafana.sh
+
+# Deploy node-app-metrics service
+>. ./sh/04-deploy-service/04-deploy-resource.sh
+
 ```
+
+## 2. 
+
+
+# FAQ
+
+## How does Prometheus know to scrape events from the services that I have launched in my cluster?
+
+The out of the box Kubernetes integration provided by Prometheus has it look at all of the service endpoints in the Kubernetes cluster and look for this annotation, `prometheus.io/scrape: 'true'`
+
+```
+# You can see this annotation in action in the following file
+> cat sh/04-deploy-service/node-app-service.yaml
+```
+
+https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus
